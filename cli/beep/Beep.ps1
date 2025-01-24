@@ -73,7 +73,7 @@ try {
     }
 
     # 長さの設定
-    $Duration = $Long ? 1000 : 300
+    $Duration = if ($Long) { 1000 } else { 300 }
     
     for ($i = 0; $i -lt $Count; $i++) {
         New-Beep -Frequency $Frequency -Duration $Duration
