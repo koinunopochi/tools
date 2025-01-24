@@ -77,7 +77,7 @@ Add-Content $PROFILE 'Set-Alias -Name beep -Value "フルパスを指定/Beep.ps
 
 ## ライセンス
 
-MITライセンス
+[MITライセンス](LICENSE)
 
 ## 貢献について
 
