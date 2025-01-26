@@ -64,7 +64,6 @@ beep -c 5 -f 2000
 
 ### PowerShell Beep Tool
 - Windows PowerShell 5.1以上
-- 管理者権限（オプション）
 
 ## ライセンス
 
