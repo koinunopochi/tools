@@ -1,0 +1,12 @@
+{
+  "name": "dynamodb-crud",
+  "version": "1.0.0",
+  "scripts": {
+    "rename-project": "powershell -Command \"Rename-Item -Path .\\simple-dynamodb\\ -NewName 'dynamodb-crud'\"",
+    "create-version-dir": "powershell -Command \"New-Item -ItemType Directory -Path .\\versions\\v1.0.0-basic-crud\"",
+    "move-to-version": "powershell -Command \"Move-Item -Path .\\dynamodb-crud\\* -Destination .\\versions\\v1.0.0-basic-crud\"",
+    "create-symlink": "powershell -Command \"New-Item -ItemType SymbolicLink -Path .\\current\\ -Target .\\versions\\v1.0.0-basic-crud\"",
+    "update-symlink": "powershell -Command \"Remove-Item .\\current; New-Item -ItemType SymbolicLink -Path .\\current\\ -Target .\\versions\\v1.1.0-validation-layer\"",
+    "list-versions": "powershell -Command \"Get-ChildItem -Path .\\versions\\ | Select-Object Name\""
+  }
+}
