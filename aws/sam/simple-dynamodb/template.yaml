@@ -1,0 +1,97 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: CRUD Operations with DynamoDB
+
+Resources:
+  SampleTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: SampleTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  CreateItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: create-item/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SampleTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable
+      Events:
+        CreateApi:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: POST
+
+  GetItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: get-item/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SampleTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref SampleTable
+      Events:
+        GetApi:
+          Type: Api
+          Properties:
+            Path: /items/{id}
+            Method: GET
+
+  UpdateItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: update-item/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SampleTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable
+      Events:
+        UpdateApi:
+          Type: Api
+          Properties:
+            Path: /items/{id}
+            Method: PUT
+
+  DeleteItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: delete-item/
+      Handler: app.handler
+      Runtime: nodejs20.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SampleTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable
+      Events:
+        DeleteApi:
+          Type: Api
+          Properties:
+            Path: /items/{id}
+            Method: DELETE
+
+Outputs:
+  ApiEndpoint:
+    Description: API Gateway Endpoint
+    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
