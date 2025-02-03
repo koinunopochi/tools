@@ -1,0 +1,8 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "lambda-on-next"
+resolve_s3 = true
+s3_prefix = "lambda-on-next"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["StreamingNextjsFunction=455992182406.dkr.ecr.ap-northeast-1.amazonaws.com/lambdaonnextc623e8f3/streamingnextjsfunctiona4f2f287repo"]
