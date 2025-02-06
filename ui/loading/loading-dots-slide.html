@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Dots Slide</title>
+  <style>
+    /* ページ全体の中央揃え */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ローディングコンテナ */
+    .loading-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 各ドットの基本スタイル */
+    .loading-dots .dot {
+      width: 16px;
+      height: 16px;
+      background-color: #333;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: slide 1s ease-in-out infinite;
+    }
+
+    /* 各ドットに順次遅延を設定 */
+    .loading-dots .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .loading-dots .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-dots .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .loading-dots .dot:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    /* アニメーション定義：左右に移動しながら透明度も変化 */
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translateX(10px);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading-dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</body>
+
+</html>

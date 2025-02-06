@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>/* CSS */
+.loader-lines {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 50px;
+  margin: 50px auto;
+}
+
+.line {
+  width: 6px;
+  height: 20px;
+  margin: 0 4px;
+  background-color: #2ecc71;
+  animation: stretch 1s infinite ease-in-out;
+}
+
+/* 各線に異なるアニメーション開始タイミングを付与 */
+.line:nth-child(1) { animation-delay: 0s; }
+.line:nth-child(2) { animation-delay: 0.1s; }
+.line:nth-child(3) { animation-delay: 0.2s; }
+.line:nth-child(4) { animation-delay: 0.3s; }
+.line:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes stretch {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(2); }
+}
+</style>
+</head>
+<body>
+  <!-- HTML -->
+  <div class="loader-lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+</body>
+</html>
