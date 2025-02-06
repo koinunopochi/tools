@@ -1,23 +1,23 @@
-# Loading Components
+# ローディングコンポーネント
 
-Simple, customizable loading animations implemented with pure HTML and CSS. These components are designed to be lightweight and easily adaptable for framework integration.
+シンプルでカスタマイズ可能なローディングアニメーションを、純粋なHTMLとCSSで実装しています。これらのコンポーネントは軽量で、フレームワークへの統合が容易です。
 
-## Available Components
+## 利用可能なコンポーネント
 
-- Loading Bar - A horizontal progress bar animation
-- Loading Dots Slide - Sliding dots animation
-- Loading Pulse - Pulsing circle animation
-- Loading Rippling Square - Expanding square animation
-- Loading Spinner - Rotating spinner animation
-- Loading Text Fall - Animated falling text effect
-- Loading Transform Circle - Circle transformation animation
-- Loading Triangle Rotation - Rotating triangle animation
+- ローディングバー - 水平プログレスバーアニメーション
+- ローディングドットスライド - スライドするドットアニメーション
+- ローディングパルス - 脈動する円アニメーション
+- ローディングリップリングスクエア - 拡張する正方形アニメーション
+- ローディングスピナー - 回転するスピナーアニメーション
+- ローディングテキストフォール - 落下するテキスト効果
+- ローディングトランスフォームサークル - 円の変形アニメーション
+- ローディングトライアングルローテーション - 回転する三角形アニメーション
 
-## Usage
+## 使用方法
 
-Each component is contained in a single HTML file with embedded CSS. To use a component, simply copy the relevant HTML and CSS into your project.
+各コンポーネントは、埋め込まれたCSSを持つ単一のHTMLファイルに含まれています。コンポーネントを使用するには、関連するHTMLとCSSをプロジェクトにコピーするだけです。
 
-Example (Loading Bar):
+例（ローディングバー）:
 
 ```html
 <div class="loading-bar-container">
@@ -48,21 +48,21 @@ Example (Loading Bar):
 </style>
 ```
 
-## Customization
+## カスタマイズ
 
-Each component can be customized through CSS variables or direct style modifications:
+各コンポーネントは、CSS変数や直接のスタイル変更を通じてカスタマイズできます：
 
-- Colors: Change the background and foreground colors
-- Size: Adjust width, height, and other dimensions
-- Animation: Modify duration and timing functions
-- Position: Change the layout and positioning as needed
+- 色: 背景色と前景色を変更
+- サイズ: 幅、高さ、その他の寸法を調整
+- アニメーション: 持続時間やタイミング関数を変更
+- 位置: レイアウトや位置を必要に応じて変更
 
-## Framework Integration
+## フレームワーク統合
 
-These components are built with vanilla HTML and CSS, making them easy to integrate into any framework:
+これらのコンポーネントはバニラHTMLとCSSで構築されているため、任意のフレームワークに簡単に統合できます：
 
-1. Extract the HTML structure
-2. Convert the CSS to your framework's styling solution
-3. Optionally wrap the component in a framework-specific component
+1. HTML構造を抽出
+2. CSSをフレームワークのスタイリングソリューションに変換
+3. 必要に応じて、フレームワーク特有のコンポーネントにラップ
 
-The simple implementation ensures smooth migration to frameworks like React, Vue, or any other preferred solution.
+シンプルな実装により、Reactや他の好ましいソリューションへのスムーズな移行が保証されます。
