@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Animation Component</title>
+  <style>
+    /* 背景や中央寄せの設定 */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #222;
+    }
+    
+    /* ローディングテキストの基本スタイル */
+    .loading {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      /* アニメーションの設定 */
+      animation: drop 2s infinite;
+    }
+    
+    /* キーフレームアニメーションの定義 */
+    @keyframes drop {
+      /* 初期状態：上から外れており、透明 */
+      0% {
+        transform: translateY(-150%);
+        opacity: 0;
+      }
+      /* 少し早い段階でフェードイン */
+      10% {
+        opacity: 1;
+      }
+      /* 中央で止まって整列 */
+      50% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      /* 下に落ちてフェードアウト */
+      80% {
+        transform: translateY(150%);
+        opacity: 0;
+      }
+      /* 終端も同じ状態で維持 */
+      100% {
+        transform: translateY(150%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">LOADING</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ローディングアニメーション - 三角形回転</title>
+  <style>
+/* CSS */
+.loader-triangles {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 50px auto;
+}
+
+.triangle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #3498db;
+  opacity: 0.2;
+  /* 各三角形を円周上に配置（--iの値に応じて回転させ、内側へ平行移動） */
+  transform: 
+    rotate(calc(var(--i) * 60deg)) 
+    translate(0, -30px) 
+    rotate(calc(-1 * var(--i) * 60deg));
+  animation: fade 1.2s infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="loader-triangles">
+    <div class="triangle" style="--i:0;"></div>
+    <div class="triangle" style="--i:1;"></div>
+    <div class="triangle" style="--i:2;"></div>
+    <div class="triangle" style="--i:3;"></div>
+    <div class="triangle" style="--i:4;"></div>
+    <div class="triangle" style="--i:5;"></div>
+  </div>
+</body>
+
+</html>

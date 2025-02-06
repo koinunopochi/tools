@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Bar</title>
+  <style>
+    body {
+      margin: 0;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .loading-bar-container {
+      width: 80%;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loading-bar {
+      width: 0%;
+      height: 100%;
+      background: #fff;
+      animation: load 2s ease-in-out infinite;
+    }
+
+    @keyframes load {
+      0% {
+        width: 0%;
+      }
+
+      50% {
+        width: 100%;
+      }
+
+      100% {
+        width: 0%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+</body>
+
+</html>
