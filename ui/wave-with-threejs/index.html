@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Three.js Audio Waveform Demo</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* UI 要素の配置 */
+    #controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+
+    #controls>* {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="controls">
+    <!-- オーディオファイル選択用 -->
+    <input type="file" id="audioInput" accept="audio/*" />
+    <!-- マイク入力開始用 -->
+    <button id="micButton">マイクを利用する</button>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
