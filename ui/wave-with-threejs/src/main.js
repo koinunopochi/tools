@@ -34,14 +34,22 @@ const audioLoader = new THREE.AudioLoader();
 const FFT_SIZE = 2048; // 時間領域解析用の fftSize
 let analyser = null;
 
-audioLoader.load('audio.mp3', (buffer) => {
-  sound.setBuffer(buffer);
-  sound.setLoop(true);
-  sound.setVolume(0.5);
-  sound.play();
+// ユーザーによるオーディオファイル選択のための処理
+const fileInput = document.getElementById('audioInput');
+fileInput.addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const fileURL = URL.createObjectURL(file);
+    audioLoader.load(fileURL, (buffer) => {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.5);
+      sound.play();
 
-  // AudioAnalyser を生成
-  analyser = new THREE.AudioAnalyser(sound, FFT_SIZE);
+      // AudioAnalyser を生成
+      analyser = new THREE.AudioAnalyser(sound, FFT_SIZE);
+    });
+  }
 });
 
 // 自動再生制限対策：ユーザー操作（クリック）で AudioContext を再開
@@ -116,7 +124,7 @@ function animate() {
     waveformHistory.pop();
     waveformHistory.unshift(amplitude);
 
-    // ユーザー指定のスケール：scaleY = height * 100
+    // ユーザー指定のスケール：scaleY = height * 1.2
     const scaleY = height * 1.2;
 
     // 各頂点の y 座標を更新（waveformHistory[0] が左端、[sampleCount-1] が右端）
