@@ -29,17 +29,22 @@ document.body.appendChild(renderer.domElement);
 const listener = new THREE.AudioListener();
 camera.add(listener);
 
+// ひとまず１つの THREE.Audio オブジェクトを生成しておき、ファイル入力かマイク入力のどちらかでソースを設定する
 const sound = new THREE.Audio(listener);
 const audioLoader = new THREE.AudioLoader();
 const FFT_SIZE = 2048; // 時間領域解析用の fftSize
 let analyser = null;
 
-// ユーザーによるオーディオファイル選択のための処理
+// ------------------------------------------------------
+// 2-a. ファイルアップロードによるオーディオ再生
+// ------------------------------------------------------
 const fileInput = document.getElementById('audioInput');
 fileInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (file) {
     const fileURL = URL.createObjectURL(file);
+    // もし以前再生していた場合は停止
+    if (sound.isPlaying) sound.stop();
     audioLoader.load(fileURL, (buffer) => {
       sound.setBuffer(buffer);
       sound.setLoop(true);
@@ -49,6 +54,33 @@ fileInput.addEventListener('change', function (event) {
       // AudioAnalyser を生成
       analyser = new THREE.AudioAnalyser(sound, FFT_SIZE);
     });
+  }
+});
+
+// ------------------------------------------------------
+// 2-b. マイク入力によるオーディオ再生
+// ------------------------------------------------------
+const micButton = document.getElementById('micButton');
+micButton.addEventListener('click', () => {
+  // ブラウザがマイク利用に対応しているか確認
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: false })
+      .then((stream) => {
+        // もし以前再生していた場合は停止
+        if (sound.isPlaying) sound.stop();
+
+        // THREE.Audio のメソッド setMediaStreamSource を利用してマイクのストリームを設定
+        sound.setMediaStreamSource(stream);
+        // ※ マイクの場合は setBuffer しないので、そのまま play() を呼ぶと解析が動作します
+        sound.play();
+        analyser = new THREE.AudioAnalyser(sound, FFT_SIZE);
+      })
+      .catch((err) => {
+        console.error('マイクのアクセスに失敗しました:', err);
+      });
+  } else {
+    alert('お使いのブラウザはマイクの利用に対応していません。');
   }
 });
 
@@ -120,7 +152,7 @@ function animate() {
     // 中央 (128) を 0 として、[-1, 1] に正規化
     const amplitude = (sampleRaw - 128) / 128;
 
-    // 新しいサンプルを**左端**に追加するため、古い値（右端）を削除し、最新の値を配列先頭に追加
+    // 新しいサンプルを左端に追加するため、古い値（右端）を削除し、最新の値を配列先頭に追加
     waveformHistory.pop();
     waveformHistory.unshift(amplitude);
 
