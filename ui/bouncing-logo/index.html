@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bouncing Logo</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bouncingCanvas"></canvas>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const canvas = document.getElementById("bouncingCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function handleResize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      handleResize();
+      window.addEventListener("resize", handleResize);
+
+      const logoImg = new Image();
+      logoImg.src = "sample-logo.svg"; // 適宜修正
+
+      let requestId;
+      let imagesLoaded = false;
+      logoImg.onload = () => {
+        imagesLoaded = true;
+        startAnimation();
+      };
+
+      const leaderWidth = 200;
+      const leaderHeight = 40;
+      const leader = {
+        x: 0,
+        y: 0,
+        vx: (Math.random() - 0.5) * 8,
+        vy: 5,
+        width: leaderWidth,
+        height: leaderHeight,
+      };
+
+      const gravity = 0.5;
+      const frictionX = 0.999;
+      const restitution = 0.8;
+
+      function animate() {
+        requestId = requestAnimationFrame(animate);
+
+        if (!imagesLoaded) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        leader.vy += gravity;
+        leader.x += leader.vx;
+        leader.y += leader.vy;
+        leader.vx *= frictionX;
+
+        if (leader.x > canvas.width) {
+          leader.x = canvas.width;
+          leader.vx = -leader.vx * restitution;
+        } else if (leader.x < leader.width) {
+          leader.x = leader.width;
+          leader.vx = -leader.vx * restitution;
+        }
+
+        const bottom = leader.y + leader.height;
+        if (bottom > canvas.height) {
+          leader.y = canvas.height - leader.height;
+          leader.vy = -leader.vy * restitution;
+
+          if (Math.abs(leader.vy) < 8) {
+            leader.vy = -(10 + Math.random() * 10);
+            leader.vx = (Math.random() - 0.5) * 8;
+          }
+        } else if (leader.y < 0) {
+          leader.y = 0;
+          leader.vy = -leader.vy * restitution;
+        }
+
+        ctx.drawImage(
+          logoImg,
+          leader.x - leader.width,
+          leader.y,
+          leader.width,
+          leader.height
+        );
+      }
+
+      function startAnimation() {
+        requestId = requestAnimationFrame(animate);
+      }
+    });
+  </script>
+</body>
+
+</html>
