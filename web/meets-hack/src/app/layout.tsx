@@ -1,7 +1,5 @@
 // app/layout.tsx
 import './globals.css';
-import { CallProvider } from './context/CallContext';
-import CallManager from './components/CallManager';
 
 export default function RootLayout({
   children,
@@ -10,12 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body>
-        <CallProvider>
-          {children}
-          <CallManager />
-        </CallProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
