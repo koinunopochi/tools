@@ -9,6 +9,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+const naganoCoords = [36.6484, 138.1943];
+const naganoMarker = L.marker(naganoCoords).addTo(map);
+
+// 3. マーカーにポップアップを設定（クリックで情報表示）
+naganoMarker.bindPopup(`
+  <h3>長野市</h3>
+  <p>ここに長野市の詳細情報を表示できます。</p>
+`);
+
   // ユーザーの位置情報を取得できるか確認
 if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(
